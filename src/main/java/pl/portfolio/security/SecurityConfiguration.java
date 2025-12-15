@@ -20,7 +20,7 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
-                        .requestMatchers("/", "/index.html", "/static/**").permitAll())
+                        .requestMatchers("/", "/index.html", "/assets/**").permitAll())
                 .formLogin((form) -> form
                         .defaultSuccessUrl("/", true)
                         .permitAll()

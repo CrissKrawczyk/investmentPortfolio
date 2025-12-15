@@ -2,6 +2,14 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.4'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'com.github.node-gradle.node' version '7.0.2'
+}
+
+node {
+	version = '22.21.1'
+	npmVersion = '10.2.3'
+	download = true
+	nodeProjectDir = file("/src/main/webapp")
 }
 
 group = 'pl.portfolio'
@@ -37,4 +45,23 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.register('reactInstallModules', com.github.gradle.node.npm.task.NpmTask) {
+	args = ['install']
+}
+
+tasks.register('buildFrontend', com.github.gradle.node.npm.task.NpmTask) {
+	dependsOn reactInstallModules
+	args = ['run', 'build']
+}
+
+tasks.register('copyFrontend', Copy) {
+	dependsOn buildFrontend
+	from "src/main/webapp/dist"
+	into "build/resources/main/static"
+}
+
+processResources {
+	dependsOn copyFrontend
 }

@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry
                 .addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/**")
+                .addResourceLocations("classpath:/static/")
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver() {
                     @Override
