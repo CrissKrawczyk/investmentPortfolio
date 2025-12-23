@@ -1,0 +1,10 @@
+{
+    "formTitle": "Zarejestruj się",
+    "fields": {
+      "login": "Nazwa użytkownika",
+      "forename": "Imię",
+      "surname": "Nazwisko",
+      "password": "Hasło"
+    },
+    "confirmFormButton": "Zarejestruj"
+  }

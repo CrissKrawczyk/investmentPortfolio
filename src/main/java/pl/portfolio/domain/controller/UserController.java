@@ -7,10 +7,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.portfolio.domain.model.User;
 import pl.portfolio.domain.service.UserService;
 
 @Controller
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
