@@ -10,8 +10,12 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PortfolioService portfolioService;
 
     public User createUser(User user) {
-        return userRepository.save(user);
+        User createdUser = userRepository.save(user);
+        portfolioService.createMainPortfolio(user);
+        return createdUser;
     }
 }
