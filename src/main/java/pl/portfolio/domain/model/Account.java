@@ -13,6 +13,9 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column
+    private String name;
+
     @JoinColumn
     @ManyToOne
     private Portfolio portfolio;

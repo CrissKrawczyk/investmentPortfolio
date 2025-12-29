@@ -1,0 +1,8 @@
+{
+  "formTitle": "Dodaj konto inwestycyjne",
+  "fields": {
+    "name": "Nazwa konta",
+    "valuePercentage": "Cześć grupy/portfela [%]"
+  },
+  "confirmFormButton": "Utwórz"
+}

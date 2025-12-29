@@ -8,10 +8,13 @@ import pl.portfolio.domain.model.Currency;
 import pl.portfolio.domain.model.User;
 import pl.portfolio.domain.repository.CurrencyRepository;
 import pl.portfolio.domain.repository.UserRepository;
+import pl.portfolio.domain.service.UserService;
 
 @Component
 public class Initializer implements CommandLineRunner {
 
+    @Autowired
+    UserService userService;
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -34,7 +37,7 @@ public class Initializer implements CommandLineRunner {
         user.setSurname("user");
         user.setPassword(passwordEncoder.encode("user"));
         user.setLogin("user");
-        this.userRepository.save(user);
+        this.userService.createUser(user);
     }
 
     private void initializeCurrencies() {

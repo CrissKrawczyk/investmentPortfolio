@@ -8,6 +8,7 @@ import { RegisterPage } from "./RegisterPage"
 import "./i18n/i18n"
 import { store } from "./store/redux-store"
 import { UserContextProvider } from "./store/user-context"
+import { CreateAccountPage } from "./CreateAccountPage"
 
 const container = document.getElementById("root")
 
@@ -23,6 +24,7 @@ if (container) {
               <Route path="/" element={<App />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/accountCreate" element={<CreateAccountPage />} />
             </Routes>
           </UserContextProvider>
         </BrowserRouter>
