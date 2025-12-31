@@ -1,0 +1,8 @@
+{
+  "formTitle": "Dodaj grupę kont inwestycyjnych",
+  "fields": {
+    "name": "Nazwa grupy",
+    "valuePercentage": "Część portfela [%]"
+  },
+  "confirmFormButton": "Utwórz grupę"
+}

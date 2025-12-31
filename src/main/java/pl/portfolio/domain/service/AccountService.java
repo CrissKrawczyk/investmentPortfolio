@@ -3,6 +3,7 @@ package pl.portfolio.domain.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.portfolio.domain.model.Account;
+import pl.portfolio.domain.model.AccountGroup;
 import pl.portfolio.domain.model.Portfolio;
 import pl.portfolio.domain.repository.AccountRepository;
 
@@ -26,6 +27,10 @@ public class AccountService {
 
     public List<Account> getPortfolioAccounts(Portfolio portfolio) {
         return accountRepository.findAllByPortfolio(portfolio);
+    }
+
+    public List<Account> getGroupAccounts(AccountGroup group) {
+        return accountRepository.findAllByGroup(group);
     }
 
 }

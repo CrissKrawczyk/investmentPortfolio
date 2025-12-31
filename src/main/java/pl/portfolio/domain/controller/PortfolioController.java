@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.portfolio.domain.model.Portfolio;
-import pl.portfolio.domain.model.webApiModels.AccountResponse;
-import pl.portfolio.domain.model.webApiModels.PortfolioResponse;
+import pl.portfolio.domain.controller.dto.portfolio.AccountInPortfolioResponse;
+import pl.portfolio.domain.controller.dto.portfolio.GroupInPortfolioResponse;
+import pl.portfolio.domain.controller.dto.portfolio.PortfolioResponse;
+import pl.portfolio.domain.service.AccountGroupService;
 import pl.portfolio.domain.service.AccountService;
 import pl.portfolio.domain.service.PortfolioService;
 
@@ -24,14 +26,21 @@ public class PortfolioController {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    AccountGroupService groupService;
+
     @GetMapping
     public ResponseEntity<PortfolioResponse> getUserPortfolio() {
         Portfolio currentUserPortfolio = portfolioService.getCurrentUserPortfolio();
-        List<AccountResponse> accounts = accountService.getPortfolioAccounts(currentUserPortfolio).stream()
+        List<AccountInPortfolioResponse> accounts = accountService.getPortfolioAccounts(currentUserPortfolio).stream()
                 .map(account ->
-                        new AccountResponse(account.getName(), String.valueOf(account.getValuePercentage())))
+                        new AccountInPortfolioResponse(account.getName(), String.valueOf(account.getValuePercentage()), account.getId()))
                 .toList();
-        return new ResponseEntity<>(new PortfolioResponse(accounts), HttpStatus.ACCEPTED);
+        List<GroupInPortfolioResponse> groups = groupService.getPortfolioGroups(currentUserPortfolio).stream()
+                .map(group ->
+                        new GroupInPortfolioResponse(group.getName(), String.valueOf(group.getValuePercentage()), group.getId()))
+                .toList();
+        return new ResponseEntity<>(new PortfolioResponse(accounts, groups), HttpStatus.ACCEPTED);
     }
 
 }

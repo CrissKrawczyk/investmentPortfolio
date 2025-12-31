@@ -1,4 +1,7 @@
 {
     "welcome": "Witaj {{caption}}. Oto twój portel inwestycyjny:",
-    "addAccountButton": "Dodaj konto"
+    "addAccountButton": "Dodaj konto",
+    "addGroupButton": "Dodaj grupę",
+    "account": "Konto: ",
+    "group": "Grupa: "
 }

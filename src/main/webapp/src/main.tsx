@@ -3,12 +3,14 @@ import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
 import { BrowserRouter, Route, Routes } from "react-router"
 import { App } from "./App"
+import { CreateAccountPage } from "./CreateAccountPage"
+import { CreateGroupPage } from "./CreateGroupPage"
+import { GroupPage } from "./GroupPage"
 import { LoginPage } from "./LoginPage"
 import { RegisterPage } from "./RegisterPage"
 import "./i18n/i18n"
 import { store } from "./store/redux-store"
 import { UserContextProvider } from "./store/user-context"
-import { CreateAccountPage } from "./CreateAccountPage"
 
 const container = document.getElementById("root")
 
@@ -24,7 +26,12 @@ if (container) {
               <Route path="/" element={<App />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/accountCreate" element={<CreateAccountPage />} />
+              <Route path="/accountCreate">
+                <Route path="" element={<CreateAccountPage />} />
+                <Route path=":groupId" element={<CreateAccountPage />} />
+              </Route>
+              <Route path="/groupCreate" element={<CreateGroupPage />} />
+              <Route path="/group/:groupId" element={<GroupPage />} />
             </Routes>
           </UserContextProvider>
         </BrowserRouter>

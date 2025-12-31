@@ -1,16 +1,24 @@
-import { useNavigate } from "react-router"
+import { useNavigate, useParams } from "react-router"
+import { useAddAccountMutation } from "./api/group-api"
 import { useCreateAccountMutation } from "./api/investment-portfolio-api"
-import { FromContextProvider } from "./store/form-context"
 import { Account } from "./model/account"
+import { FromContextProvider } from "./store/form-context"
 
 export const CreateAccountPage = () => {
+  const { groupId } = useParams()
   const [createAccount] = useCreateAccountMutation()
+  const [createAccountInGroup] = useAddAccountMutation()
   const navigate = useNavigate()
 
   const createAccountHandler = async (data: Account) => {
-    const result = await createAccount(data)
+    let result
+    if (groupId) {
+      result = await createAccountInGroup({ account: data, groupId })
+    } else {
+      result = await createAccount(data)
+    }
     if (result.data) {
-      navigate("/")
+      navigate(groupId ? `/group/${groupId}` : "/")
       return true
     }
     return false
