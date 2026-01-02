@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router"
-import { useAddAccountMutation } from "./api/group-api"
-import { useCreateAccountMutation } from "./api/investment-portfolio-api"
-import { Account } from "./model/account"
-import { FromContextProvider } from "./store/form-context"
+import { useAddAccountMutation } from "../api/group-api"
+import { AccountFormData } from "../model/account"
+import { FromContextProvider } from "../store/form-context"
+import { useCreateAccountMutation } from "../api/account-api"
 
 export const CreateAccountPage = () => {
   const { groupId } = useParams()
@@ -10,7 +10,7 @@ export const CreateAccountPage = () => {
   const [createAccountInGroup] = useAddAccountMutation()
   const navigate = useNavigate()
 
-  const createAccountHandler = async (data: Account) => {
+  const createAccountHandler = async (data: AccountFormData) => {
     let result
     if (groupId) {
       result = await createAccountInGroup({ account: data, groupId })
@@ -26,7 +26,7 @@ export const CreateAccountPage = () => {
 
   return (
     <div>
-      <FromContextProvider<Account>
+      <FromContextProvider<AccountFormData>
         formIdn="CreateAccountForm"
         fields={[
           {

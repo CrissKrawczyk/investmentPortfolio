@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { useUserContext } from "./store/user-context"
-import { PortfolioPage } from "./PortfolioPage"
+import { PortfolioPage } from "./pages/PortfolioPage"
 
 export const App = () => {
   const { user } = useUserContext()

@@ -33,4 +33,8 @@ public class AccountService {
         return accountRepository.findAllByGroup(group);
     }
 
+    public Account getAccount(Integer id) {
+        return accountRepository.getReferenceById(id);
+    }
+
 }

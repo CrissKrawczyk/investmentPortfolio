@@ -1,5 +1,5 @@
 import { DataType } from "../store/form-context"
-import { Account } from "./account"
+import { Account, AccountFormData } from "./account"
 
 export interface GroupFormData extends DataType {
   name: string
@@ -20,6 +20,6 @@ export interface Group {
 }
 
 export interface AddAccountRequest {
-  account: Account
+  account: AccountFormData
   groupId: string
 }

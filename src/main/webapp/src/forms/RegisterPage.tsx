@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router"
-import { useRegisterMutation } from "./api/investment-portfolio-api"
-import { User } from "./model/user"
-import { FromContextProvider } from "./store/form-context"
+import { useRegisterMutation } from "../api/investment-portfolio-api"
+import { User } from "../model/user"
+import { FromContextProvider } from "../store/form-context"
 
 export const RegisterPage = () => {
   const [register] = useRegisterMutation()

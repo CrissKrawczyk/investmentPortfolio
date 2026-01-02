@@ -1,0 +1,7 @@
+{
+  "formTitle": "Dodaj pozycję do konta",
+  "fields": {
+    "name": "Nazwa pozycji"
+  },
+  "confirmFormButton": "Utwórz"
+}

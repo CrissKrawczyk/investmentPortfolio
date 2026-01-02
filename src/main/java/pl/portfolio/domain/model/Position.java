@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -18,9 +20,12 @@ public class Position {
     private Account account;
 
     @Column
-    private double value;
+    private String name;
+
+    @OneToMany(mappedBy="position")
+    private List<Transaction> transactions;
 
     @Column
-    private double amount;
+    private int valuePercentage;
 
 }

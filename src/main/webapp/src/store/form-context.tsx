@@ -30,12 +30,14 @@ interface FromContextProviderProps<
 > extends PropsWithChildren {
   fields: FieldProps<any>[]
   confirmHandler: (data: T) => Promise<boolean>
+  cancelHandler?: () => void
   formIdn: string
 }
 
 export const FromContextProvider = <T extends DataType>({
   fields,
   confirmHandler,
+  cancelHandler,
   formIdn,
 }: FromContextProviderProps<T>) => {
   const [data, setData] = useState<T>({} as T)
@@ -72,6 +74,11 @@ export const FromContextProvider = <T extends DataType>({
       {
         <button onClick={() => confirmHandler(data)}>
           {t("confirmFormButton")}
+        </button>
+      }
+      {cancelHandler &&
+        <button onClick={cancelHandler}>
+          {t("cancelFormButton")}
         </button>
       }
     </FromContext.Provider>

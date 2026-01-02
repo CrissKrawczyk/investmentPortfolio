@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import pl.portfolio.domain.controller.dto.account.AccountResponse;
 import pl.portfolio.domain.model.Account;
 import pl.portfolio.domain.service.AccountService;
 
@@ -18,9 +17,16 @@ public class AccountController {
     AccountService accountService;
 
     @PostMapping
-    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+    public ResponseEntity<AccountResponse> createAccount(@RequestBody Account account) {
         Account savedAccount = accountService.createAccount(account);
-        return new ResponseEntity<>(savedAccount, HttpStatus.CREATED);
+        return new ResponseEntity<>(AccountResponse.fromAccount(savedAccount), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    @RequestMapping("/{id}")
+    public ResponseEntity<AccountResponse> getAccount(@PathVariable Integer id) {
+        Account account = accountService.getAccount(id);
+        return new ResponseEntity<>(AccountResponse.fromAccount(account), HttpStatus.OK);
     }
 
 }

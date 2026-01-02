@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router"
-import { useCreateGroupMutation } from "./api/group-api"
-import { GroupFormData } from "./model/group"
-import { FromContextProvider } from "./store/form-context"
+import { useCreateGroupMutation } from "../api/group-api"
+import { GroupFormData } from "../model/group"
+import { FromContextProvider } from "../store/form-context"
 
 export const CreateGroupPage = () => {
   const [createGroup] = useCreateGroupMutation()

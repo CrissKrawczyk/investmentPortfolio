@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { useNavigate, useParams } from "react-router"
-import { useGetGroupQuery } from "./api/group-api"
+import { useGetGroupQuery } from "../api/group-api"
 
 export const GroupPage = () => {
   const { groupId } = useParams()
@@ -10,6 +10,10 @@ export const GroupPage = () => {
 
   const moveToAccountCreation = () => {
     navigate(`/accountCreate/${groupId}`)
+  }
+
+  const moveToAccount = (id: number) => {
+    navigate(`account/${id}`)
   }
 
   if (!group) {
@@ -22,7 +26,7 @@ export const GroupPage = () => {
     <div>
       <h1>{t("title", { groupName: group.name })}</h1>
       {accounts.map(account => (
-        <div key={`group-account-${account.name}`}>
+        <div onClick={() => moveToAccount(account.id)} key={`group-account-${account.name}`}>
           {t("account")}
           {account.name}
         </div>

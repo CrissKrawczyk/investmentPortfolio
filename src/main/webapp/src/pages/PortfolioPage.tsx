@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
-import { useGetPortfolioDataQuery } from "./api/investment-portfolio-api"
+import { useGetPortfolioDataQuery } from "../api/investment-portfolio-api"
 
 export const PortfolioPage = () => {
   const { data: portfolio } = useGetPortfolioDataQuery()
@@ -19,6 +19,10 @@ export const PortfolioPage = () => {
     navigate(`/group/${id}`)
   }
 
+  const moveToAccount = (id: number) => {
+    navigate(`/account/${id}`)
+  }
+
   if (!portfolio) {
     return
   }
@@ -29,7 +33,7 @@ export const PortfolioPage = () => {
   return (
     <div>
       {accounts.map(account => (
-        <div key={`account-${account.name}`}>
+        <div onClick={() => moveToAccount(account.id)} key={`account-${account.name}`}>
           {t("account")}
           {account.name}
         </div>

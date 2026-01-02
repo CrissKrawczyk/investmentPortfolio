@@ -3,14 +3,16 @@ import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
 import { BrowserRouter, Route, Routes } from "react-router"
 import { App } from "./App"
-import { CreateAccountPage } from "./CreateAccountPage"
-import { CreateGroupPage } from "./CreateGroupPage"
-import { GroupPage } from "./GroupPage"
+import { CreateAccountPage } from "./forms/CreateAccountPage"
+import { CreateGroupPage } from "./forms/CreateGroupPage"
+import { GroupPage } from "./pages/GroupPage"
 import { LoginPage } from "./LoginPage"
-import { RegisterPage } from "./RegisterPage"
+import { RegisterPage } from "./forms/RegisterPage"
 import "./i18n/i18n"
 import { store } from "./store/redux-store"
 import { UserContextProvider } from "./store/user-context"
+import { AccountPage } from "./pages/AccountPage"
+import { CreatePositionPage } from "./forms/CreatePositionPage"
 
 const container = document.getElementById("root")
 
@@ -32,6 +34,10 @@ if (container) {
               </Route>
               <Route path="/groupCreate" element={<CreateGroupPage />} />
               <Route path="/group/:groupId" element={<GroupPage />} />
+              <Route path="/account/:accountId" element={<AccountPage />} />
+              <Route path="/group/:groupId/account/:accountId" element={<AccountPage />} />
+              <Route path="/account/:accountId/positionCreate" element={<CreatePositionPage />} />
+              <Route path="/group/:groupId/account/:accountId/positionCreate" element={<CreatePositionPage />} />
             </Routes>
           </UserContextProvider>
         </BrowserRouter>
