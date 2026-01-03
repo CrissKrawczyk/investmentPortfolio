@@ -33,7 +33,7 @@ public class Account {
     private Currency currency;
 
     @Column
-    private int valuePercentage;
+    private Integer valuePercentage;
 
     @OneToMany(mappedBy="account")
     private List<Position> positions;

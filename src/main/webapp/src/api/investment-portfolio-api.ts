@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { Portfolio } from "../model/portfolio"
 import { User, UserLoginData } from "../model/user"
+import { PaymentTreeData } from "../components/fields/PaymentTreeField/PaymentTreeField"
 
 export const investmentPortfolioApi = createApi({
   reducerPath: "pokemonApi",
@@ -27,6 +28,13 @@ export const investmentPortfolioApi = createApi({
       }),
       providesTags: ["portfolio"],
     }),
+    getDataToComputeDistribution: build.query<PaymentTreeData, void>({
+      query: () => ({
+        url: `api/portfolio/dataToComputeDistribution`,
+        method: "GET",
+      }),
+      providesTags: ["portfolio"],
+    }),
   }),
 })
 
@@ -34,4 +42,5 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useGetPortfolioDataQuery,
+  useGetDataToComputeDistributionQuery
 } = investmentPortfolioApi

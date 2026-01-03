@@ -23,6 +23,10 @@ export const PortfolioPage = () => {
     navigate(`/account/${id}`)
   }
 
+  const moveToPaymentCalculationPage = () => {
+    navigate(`/paymentCalculation`)
+  }
+
   if (!portfolio) {
     return
   }
@@ -46,6 +50,7 @@ export const PortfolioPage = () => {
       ))}
       <button onClick={moveToAccountCreation}>{t("addAccountButton")}</button>
       <button onClick={moveToGroupCreation}>{t("addGroupButton")}</button>
+      <button onClick={moveToPaymentCalculationPage}>{t("calculatePayment")}</button>
     </div>
   )
 }

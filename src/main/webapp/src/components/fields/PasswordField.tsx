@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material"
-import { FieldProps, useFormContext } from "../../store/form-context"
+import { FormFieldProps, useFormContext } from "../../store/form-context"
 
-export interface PasswordProps extends FieldProps<PasswordParams> {}
+export interface PasswordProps extends FormFieldProps<PasswordParams> { }
 export interface PasswordParams {
   minLength: number
 }

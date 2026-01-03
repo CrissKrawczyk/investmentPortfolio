@@ -3,5 +3,6 @@
     "addAccountButton": "Dodaj konto",
     "addGroupButton": "Dodaj grupę",
     "account": "Konto: ",
-    "group": "Grupa: "
+    "group": "Grupa: ",
+    "calculatePayment": "Oblicz wpłatę"
 }

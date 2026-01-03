@@ -13,6 +13,7 @@ import { store } from "./store/redux-store"
 import { UserContextProvider } from "./store/user-context"
 import { AccountPage } from "./pages/AccountPage"
 import { CreatePositionPage } from "./forms/CreatePositionPage"
+import { PaymentCalculationPage } from "./forms/PaymentCalculationPage"
 
 const container = document.getElementById("root")
 
@@ -38,6 +39,7 @@ if (container) {
               <Route path="/group/:groupId/account/:accountId" element={<AccountPage />} />
               <Route path="/account/:accountId/positionCreate" element={<CreatePositionPage />} />
               <Route path="/group/:groupId/account/:accountId/positionCreate" element={<CreatePositionPage />} />
+              <Route path="/paymentCalculation" element={<PaymentCalculationPage />} />
             </Routes>
           </UserContextProvider>
         </BrowserRouter>

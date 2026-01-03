@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -21,5 +23,9 @@ public class AccountGroup {
     private String name;
 
     @Column
-    private int valuePercentage;
+    private Integer valuePercentage;
+
+    @OneToMany(mappedBy="group")
+    private List<Account> accounts;
+
 }

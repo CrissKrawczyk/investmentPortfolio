@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -19,5 +21,12 @@ public class Portfolio {
 
     @Column
     private String name;
+
+    @OneToMany(mappedBy="portfolio")
+    private List<Account> directAccounts;
+
+    @OneToMany(mappedBy="portfolio")
+    private List<AccountGroup> groups;
+
 
 }

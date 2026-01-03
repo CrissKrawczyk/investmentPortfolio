@@ -26,6 +26,6 @@ public class Position {
     private List<Transaction> transactions;
 
     @Column
-    private int valuePercentage;
+    private Integer valuePercentage;
 
 }

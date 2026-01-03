@@ -4,7 +4,12 @@ import { Field } from "../components/fields/Fields"
 
 export type FieldType = "text" | "password"
 
-export interface FieldProps<P> {
+export interface FieldProps<P> extends FormFieldProps<P> {
+  setValue: (value: string) => void
+  value: string
+}
+
+export interface FormFieldProps<P> {
   idn: string
   type: FieldType
   params: P
@@ -28,7 +33,7 @@ const FromContext = createContext<FormContextData<any>>(
 interface FromContextProviderProps<
   T extends DataType,
 > extends PropsWithChildren {
-  fields: FieldProps<any>[]
+  fields: FormFieldProps<any>[]
   confirmHandler: (data: T) => Promise<boolean>
   cancelHandler?: () => void
   formIdn: string

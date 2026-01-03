@@ -1,16 +1,15 @@
 import { TextField as FieldBase } from "@mui/material"
-import { FieldProps, useFormContext } from "../../store/form-context"
+import { FieldProps } from "../../store/form-context"
 
-export interface TextProps extends FieldProps<undefined> {}
+export interface TextProps extends FieldProps<undefined> { }
 
-export const TextField = ({ idn }: TextProps) => {
-  const { setValue, getValue } = useFormContext()
-  const value = getValue(idn)
+export const TextField = (props: TextProps) => {
+  const { setValue, value } = props
 
   return (
     <FieldBase
       value={value}
-      onChange={v => setValue(idn, v.currentTarget.value)}
+      onChange={v => setValue(v.currentTarget.value)}
     />
   )
 }
