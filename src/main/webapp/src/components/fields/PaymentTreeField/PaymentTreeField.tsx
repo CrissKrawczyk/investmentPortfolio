@@ -1,34 +1,32 @@
 import { useTranslation } from "react-i18next"
-import { useState } from "react"
 import { ParentTreeNode } from "./ParentTreeNode"
 import { TextField } from "../TextField"
+import { PaymentCalculationData } from "../../../forms/PaymentCalculationPage"
 
 export interface PaymentTreeData {
   type: ElementType
   name: string
   percentageValue: number
   id: number
-  value?: string
+  value: number
   items: PaymentTreeData[]
 }
 
 export type ElementType = 'group' | 'account' | 'position' | 'portfolio'
 
 export interface PaymentTreeFieldProps {
-  data: PaymentTreeData
+  value: PaymentCalculationData
+  setValue: (data: PaymentCalculationData) => void
 }
 
-export const PaymentTreeField = ({ data }: PaymentTreeFieldProps) => {
+export const PaymentTreeField = ({ value, setValue }: PaymentTreeFieldProps) => {
   const { t } = useTranslation("PaymentTreeField")
-  const [value, setValue] = useState<PaymentTreeData>(data)
-  const [toPay, setToPay] = useState<string>("")
 
   return (
     <div>
-      <TextField setValue={setToPay} value={toPay} idn="toPay" type="text" params={undefined} />
+      <TextField setValue={(v) => setValue({ ...value, paymentValue: v })} value={value.paymentValue} idn="paymentValue" type="text" params={undefined} />
       {t('portfolio')}
-      <ParentTreeNode item={value} setValue={setValue} />
-      <button onClick={() => console.log(value)}>{t("confirm")}</button>
+      <ParentTreeNode item={value.data} setValue={(v) => setValue({ ...value, data: v })} />
     </div>
   )
 }

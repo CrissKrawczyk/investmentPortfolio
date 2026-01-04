@@ -24,7 +24,7 @@ public class DataForDistributionResolver {
         ArrayList<DataForDistributionCompute> portfolioItems = new ArrayList<>(getGroupsData(groups));
         List<Account> accounts = portfolio.getDirectAccounts();
         portfolioItems.addAll(getAccountsData(accounts));
-        return new DataForDistributionCompute(portfolio.getId(), "", DistributionObjectType.portfolio, 100, portfolioItems);
+        return new DataForDistributionCompute(portfolio.getId(), "", DistributionObjectType.portfolio, 100, portfolioItems, 0);
     }
 
     private List<DataForDistributionCompute> getGroupsData(List<AccountGroup> accounts) {

@@ -1,7 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { Portfolio } from "../model/portfolio"
 import { User, UserLoginData } from "../model/user"
-import { PaymentTreeData } from "../components/fields/PaymentTreeField/PaymentTreeField"
+import { ElementType, PaymentTreeData } from "../components/fields/PaymentTreeField/PaymentTreeField"
+import { PaymentCalculationData } from "../forms/PaymentCalculationPage"
+
+export interface PaymentDistribution {
+  type: ElementType,
+  name: string
+  items: PaymentDistribution[]
+  value: number
+}
 
 export const investmentPortfolioApi = createApi({
   reducerPath: "pokemonApi",
@@ -35,6 +43,13 @@ export const investmentPortfolioApi = createApi({
       }),
       providesTags: ["portfolio"],
     }),
+    computePaymentDistribution: build.query<PaymentDistribution, PaymentCalculationData>({
+      query: data => ({
+        url: `api/portfolio/computePaymentDistribution`,
+        method: "POST",
+        body: data
+      }),
+    }),
   }),
 })
 
@@ -42,5 +57,6 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useGetPortfolioDataQuery,
-  useGetDataToComputeDistributionQuery
+  useGetDataToComputeDistributionQuery,
+  useLazyComputePaymentDistributionQuery
 } = investmentPortfolioApi

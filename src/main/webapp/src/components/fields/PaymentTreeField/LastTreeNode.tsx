@@ -11,7 +11,7 @@ export const LastTreeNode = (props: LastTreeNodeProps) => {
     const setValue = props.setValue
 
     return <div>
-        <TextField idn={`${type}-${id}`} value={value || ""} type="text" params={undefined}
-            setValue={(v) => setValue({ ...props.item, value: v })} />
+        <TextField idn={`${type}-${id}`} value={value.toString()} type="text" params={undefined}
+            setValue={(v) => setValue({ ...props.item, value: Number.parseInt(v) })} />
     </div>
 }

@@ -12,7 +12,7 @@ export const ParentTreeNode = (props: ParentTreeNodeProps) => {
     const [value, setValue] = useState<PaymentTreeData[]>(items)
 
     useEffect(() => {
-        props.setValue({ ...props.item, items: value })
+        props.setValue({ ...props.item, items: value, value: value.map(item => item.value).reduce((p, c) => p + c) })
     }, [value])
 
     const setItemValue = (itemValue: PaymentTreeData) => {
