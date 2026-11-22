@@ -9,11 +9,11 @@ export const RegisterPage = () => {
 
   const registerHandler = async (data: User) => {
     const result = await register(data)
-    if (result.data) {
+    if (result.data && result.data.valid) {
       navigate("/login")
-      return true
+    } else if (result.data?.errors) {
+      return result.data.errors
     }
-    return false
   }
 
   return (
@@ -24,22 +24,26 @@ export const RegisterPage = () => {
           {
             idn: "login",
             type: "text",
+            required: true,
             params: undefined,
           },
           {
             idn: "forename",
             type: "text",
+            required: true,
             params: undefined,
           },
           {
             idn: "surname",
             type: "text",
+            required: true,
             params: undefined,
           },
           {
             idn: "password",
             type: "password",
-            params: { minLength: 8 },
+            required: true,
+            params: undefined,
           },
         ]}
         confirmHandler={registerHandler}

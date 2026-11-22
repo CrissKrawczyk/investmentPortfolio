@@ -22,10 +22,14 @@ public class Position {
     @Column
     private String name;
 
-    @OneToMany(mappedBy="position")
+    @OneToMany(mappedBy = "position", orphanRemoval = true)
     private List<Transaction> transactions;
 
     @Column
     private Integer valuePercentage;
+
+    @JoinColumn
+    @ManyToOne
+    private Currency currency;
 
 }

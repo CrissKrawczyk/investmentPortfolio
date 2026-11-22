@@ -16,11 +16,11 @@ export const AddTransactionForm = (props: AddTransactionFormProps) => {
   const addTransaction = async (data: TransactionFormData) => {
     const addingFunction = type === 'Sale' ? sell : buy
     const result = await addingFunction({ transaction: data, positionId })
-    if (result.data) {
+    if (result.data && result.data.valid) {
       onClose()
-      return true
+    } else if (result.data?.errors) {
+      return result.data.errors
     }
-    return false
   }
 
   return (
@@ -30,13 +30,17 @@ export const AddTransactionForm = (props: AddTransactionFormProps) => {
         fields={[
           {
             idn: "price",
-            type: "text",
-            params: undefined,
+            type: "numeric",
+            params: {
+              decimalDigits: 2
+            },
           },
           {
             idn: "amount",
-            type: "text",
-            params: undefined,
+            type: "numeric",
+            params: {
+              decimalDigits: 2
+            },
           },
         ]}
         confirmHandler={addTransaction}

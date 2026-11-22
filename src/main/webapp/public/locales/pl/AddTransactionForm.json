@@ -1,8 +1,12 @@
 {
   "formTitle": "Dodaj transakcję",
   "fields": {
-    "amount": "Ilość",
-    "price": "Cena"
+    "amount": {
+      "label": "Ilość"
+    },
+    "price": {
+      "label": "Cena"
+    }
   },
   "confirmFormButton": "Dodaj",
   "cancelFormButton": "Anuluj"

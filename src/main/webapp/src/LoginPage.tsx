@@ -14,11 +14,10 @@ export const LoginPage = () => {
   const loginHandler = async (data: UserLoginData) => {
     const result = await login(data)
     if (result.data) {
-      setUser(result.data)
-      navigate("/")
-      return true
+      setUser(result.data.user)
+      navigate(`/portfolio/${result.data.portfolioId}`)
     }
-    return false
+    return undefined
   }
 
   return (
@@ -34,7 +33,7 @@ export const LoginPage = () => {
           {
             idn: "password",
             type: "password",
-            params: { minLength: 8 },
+            params: {},
           },
         ]}
         confirmHandler={loginHandler}

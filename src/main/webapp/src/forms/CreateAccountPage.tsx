@@ -5,7 +5,7 @@ import { FromContextProvider } from "../store/form-context"
 import { useCreateAccountMutation } from "../api/account-api"
 
 export const CreateAccountPage = () => {
-  const { groupId } = useParams()
+  const { groupId, portfolioId } = useParams()
   const [createAccount] = useCreateAccountMutation()
   const [createAccountInGroup] = useAddAccountMutation()
   const navigate = useNavigate()
@@ -15,13 +15,13 @@ export const CreateAccountPage = () => {
     if (groupId) {
       result = await createAccountInGroup({ account: data, groupId })
     } else {
-      result = await createAccount(data)
+      result = await createAccount({ account: data, portfolioId })
     }
-    if (result.data) {
-      navigate(groupId ? `/group/${groupId}` : "/")
-      return true
+    if (result.data && result.data.valid) {
+      navigate(`../account/${result.data.object.id}`)
+    } else if (result.data?.errors) {
+      return result.data.errors
     }
-    return false
   }
 
   return (
@@ -36,7 +36,7 @@ export const CreateAccountPage = () => {
           },
           {
             idn: "valuePercentage",
-            type: "text",
+            type: "numeric",
             params: undefined,
           },
         ]}

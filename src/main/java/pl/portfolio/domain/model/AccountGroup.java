@@ -19,13 +19,20 @@ public class AccountGroup {
     @ManyToOne
     private Portfolio portfolio;
 
+    @JoinColumn
+    @ManyToOne
+    private AccountGroup group;
+
     @Column
     private String name;
 
     @Column
     private Integer valuePercentage;
 
-    @OneToMany(mappedBy="group")
+    @OneToMany(mappedBy = "group", orphanRemoval = true)
     private List<Account> accounts;
+
+    @OneToMany(mappedBy = "group", orphanRemoval = true)
+    private List<AccountGroup> groups;
 
 }

@@ -35,7 +35,7 @@ public class Account {
     @Column
     private Integer valuePercentage;
 
-    @OneToMany(mappedBy="account")
+    @OneToMany(mappedBy = "account", orphanRemoval = true)
     private List<Position> positions;
 
 }

@@ -1,0 +1,9 @@
+{
+  "formTitle": "Dodaj portfel testowy",
+  "fields": {
+    "name": {
+      "label": "Nazwa portfela"
+    }
+  },
+  "confirmFormButton": "Utwórz portfel"
+}

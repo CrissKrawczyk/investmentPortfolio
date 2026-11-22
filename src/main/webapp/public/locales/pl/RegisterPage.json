@@ -1,10 +1,27 @@
 {
-    "formTitle": "Zarejestruj się",
-    "fields": {
-      "login": "Nazwa użytkownika",
-      "forename": "Imię",
-      "surname": "Nazwisko",
-      "password": "Hasło"
+  "formTitle": "Zarejestruj się",
+  "fields": {
+    "login": {
+      "label": "Nazwa użytkownika",
+      "error": {
+        "notUnique": "Użytkownik o tym loginie już istenieje"
+      }
     },
-    "confirmFormButton": "Zarejestruj"
-  }
+    "forename": {
+      "label": "Imię"
+    },
+    "surname": {
+      "label": "Nazwisko"
+    },
+    "password": {
+      "label": "Hasło",
+      "error": {
+        "tooShort": "Minimalna długość hasła to 14 znaków",
+        "noSpecialCharacter": "Hasło musi posiadać co najmniej jeden znak specjalny",
+        "noNumber": "Hasło musi posiadać co najmniej jedną cyfrę",
+        "noUppercaseLetter": "Hasło musi posiadać co najmniej jedną wielką literę"
+      }
+    }
+  },
+  "confirmFormButton": "Zarejestruj"
+}

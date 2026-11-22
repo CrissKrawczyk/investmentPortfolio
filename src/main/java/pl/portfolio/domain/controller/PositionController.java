@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.portfolio.businessLogic.validations.ValidatedObject;
 import pl.portfolio.domain.controller.dto.Transaction.TransactionResponse;
 import pl.portfolio.domain.controller.dto.position.PositionResponse;
 import pl.portfolio.domain.model.Account;
@@ -33,31 +34,34 @@ public class PositionController {
 
     @PostMapping
     @RequestMapping("/{accountId}/addPosition")
-    public ResponseEntity<PositionResponse> createPosition(@RequestBody Position position, @PathVariable Integer accountId) {
+    public ResponseEntity<ValidatedObject<PositionResponse>> createPosition(@RequestBody Position position, @PathVariable Integer accountId) {
         Account account = accountService.getAccount(accountId);
         position.setAccount(account);
-        Position savedPosition = positionService.createPosition(position);
-        return new ResponseEntity<>(PositionResponse.fromPosition(savedPosition), HttpStatus.CREATED);
+        ValidatedObject<Position> savedPosition = positionService.createPosition(position);
+        PositionResponse positionResponse = PositionResponse.fromPosition(savedPosition.getObject());
+        return new ResponseEntity<>(savedPosition.forNewObject(positionResponse), savedPosition.getStatusByErrors(HttpStatus.CREATED));
     }
 
     @PostMapping
     @RequestMapping("/{positionId}/buy")
-    public ResponseEntity<TransactionResponse> buy(@RequestBody Transaction transaction, @PathVariable Integer positionId) {
+    public ResponseEntity<ValidatedObject<TransactionResponse>> buy(@RequestBody Transaction transaction, @PathVariable Integer positionId) {
         Position position = positionService.getPosition(positionId);
         transaction.setPosition(position);
         transaction.setTransactionType(TransactionType.Purchase);
-        Transaction savedTransaction = transactionService.createTransaction(transaction);
-        return new ResponseEntity<>(TransactionResponse.fromTransaction(savedTransaction), HttpStatus.CREATED);
+        ValidatedObject<Transaction> savedTransaction = transactionService.createTransaction(transaction);
+        TransactionResponse transactionResponse = TransactionResponse.fromTransaction(savedTransaction.getObject());
+        return new ResponseEntity<>(savedTransaction.forNewObject(transactionResponse), savedTransaction.getStatusByErrors(HttpStatus.CREATED));
     }
 
     @PostMapping
     @RequestMapping("/{positionId}/sell")
-    public ResponseEntity<TransactionResponse> sell(@RequestBody Transaction transaction, @PathVariable Integer positionId) {
+    public ResponseEntity<ValidatedObject<TransactionResponse>> sell(@RequestBody Transaction transaction, @PathVariable Integer positionId) {
         Position position = positionService.getPosition(positionId);
         transaction.setPosition(position);
         transaction.setTransactionType(TransactionType.Sale);
-        Transaction savedTransaction = transactionService.createTransaction(transaction);
-        return new ResponseEntity<>(TransactionResponse.fromTransaction(savedTransaction), HttpStatus.CREATED);
+        ValidatedObject<Transaction> savedTransaction = transactionService.createTransaction(transaction);
+        TransactionResponse transactionResponse = TransactionResponse.fromTransaction(savedTransaction.getObject());
+        return new ResponseEntity<>(savedTransaction.forNewObject(transactionResponse), savedTransaction.getStatusByErrors(HttpStatus.CREATED));
     }
 
 }

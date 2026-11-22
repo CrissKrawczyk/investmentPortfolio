@@ -1,8 +1,12 @@
 {
     "formTitle": "Zaloguj się",
     "fields": {
-      "name": "Nazwa użytkownika",
-      "password": "Hasło"
+      "name": {
+        "label": "Nazwa użytkownika"
+      },
+      "password": {
+        "label": "Hasło"
+      }
     },
     "confirmFormButton": "Zaloguj",
     "registerButton": "Zarejestruj się"

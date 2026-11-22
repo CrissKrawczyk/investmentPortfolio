@@ -16,17 +16,20 @@ public class Portfolio {
     private Integer id;
 
     @JoinColumn
-    @OneToOne
+    @ManyToOne
     private User owner;
 
     @Column
     private String name;
 
-    @OneToMany(mappedBy="portfolio")
+    @OneToMany(mappedBy = "portfolio", orphanRemoval = true)
     private List<Account> directAccounts;
 
-    @OneToMany(mappedBy="portfolio")
+    @OneToMany(mappedBy = "portfolio", orphanRemoval = true)
     private List<AccountGroup> groups;
+
+    @Column
+    private Boolean testPortfolio;
 
 
 }

@@ -1,8 +1,14 @@
 {
-    "welcome": "Witaj {{caption}}. Oto twój portel inwestycyjny:",
-    "addAccountButton": "Dodaj konto",
-    "addGroupButton": "Dodaj grupę",
-    "account": "Konto: ",
-    "group": "Grupa: ",
-    "calculatePayment": "Oblicz wpłatę"
+  "welcome": "Witaj {{caption}}",
+  "mainPortfolio": "Oto twój główny portel inwestycyjny:",
+  "otherPortfolio": "Oto twój portel inwestycyjny {{name}}:",
+  "addAccountButton": "Dodaj konto",
+  "addGroupButton": "Dodaj grupę",
+  "account": "Konto: ",
+  "group": "Grupa: ",
+  "calculatePayment": "Oblicz wpłatę",
+  "otherPortfolios": "Twoje pozostałe portfele",
+  "createTestPortfolio": "Utwórz portfel testowy",
+  "mainUserPortfolio": "Portfel główny",
+  "deletePortfolio": "Usuń portfel testowy"
 }

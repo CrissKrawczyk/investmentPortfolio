@@ -3,11 +3,11 @@ package pl.portfolio.domain.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.portfolio.businessLogic.validations.ValidatedObject;
 import pl.portfolio.domain.model.User;
 import pl.portfolio.domain.service.UserService;
 
@@ -16,16 +16,12 @@ import pl.portfolio.domain.service.UserService;
 public class UserController {
 
     @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
     UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> register(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User savedUser = userService.createUser(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    public ResponseEntity<ValidatedObject<User>> register(@RequestBody User user) {
+        ValidatedObject<User> savedUser = userService.createUser(user);
+        return new ResponseEntity<>(savedUser, savedUser.getStatusByErrors(HttpStatus.CREATED));
     }
 
 }

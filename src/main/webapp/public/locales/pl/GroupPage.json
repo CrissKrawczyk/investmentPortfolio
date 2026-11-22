@@ -1,5 +1,9 @@
 {
     "title": "Grupa {{groupName}}",
+    "accounts": "Konta w grupie:",
+    "groups": "Podgrupy:",
     "addAccountButton": "Dodaj konto do grupy",
-    "account": "Konto: "
+    "addGroupButton": "Dodaj podgrupę",
+    "account": "Konto: ",
+    "group": "Podgrupa: "
 }

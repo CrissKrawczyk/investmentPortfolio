@@ -35,7 +35,7 @@ public class Initializer implements CommandLineRunner {
         User user = new User();
         user.setForename("user");
         user.setSurname("user");
-        user.setPassword(passwordEncoder.encode("user"));
+        user.setPassword("admin123!USER!");
         user.setLogin("user");
         this.userService.createUser(user);
     }

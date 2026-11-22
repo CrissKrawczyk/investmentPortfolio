@@ -2,6 +2,7 @@ package pl.portfolio.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.portfolio.businessLogic.validations.ValidatedObject;
 import pl.portfolio.domain.model.Account;
 import pl.portfolio.domain.model.AccountGroup;
 import pl.portfolio.domain.model.Portfolio;
@@ -18,11 +19,11 @@ public class AccountService {
     @Autowired
     private PortfolioService portfolioService;
 
-    public Account createAccount(Account account) {
+    public ValidatedObject<Account> createAccount(Account account) {
         if (account.getGroup() == null && account.getPortfolio() == null) {
             account.setPortfolio(portfolioService.getCurrentUserPortfolio());
         }
-        return accountRepository.save(account);
+        return new ValidatedObject<>(accountRepository.save(account));
     }
 
     public List<Account> getPortfolioAccounts(Portfolio portfolio) {

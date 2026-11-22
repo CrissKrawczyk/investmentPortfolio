@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import pl.portfolio.domain.model.User;
 import pl.portfolio.domain.repository.UserRepository;
+import pl.portfolio.domain.service.PortfolioService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +19,8 @@ import java.io.PrintWriter;
 public class AppAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Autowired
     UserRepository repository;
+    @Autowired
+    PortfolioService portfolioService;
 
     protected void handle(HttpServletRequest request, HttpServletResponse response,
                           Authentication authentication) throws IOException, ServletException {
@@ -26,9 +29,14 @@ public class AppAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
         response.setCharacterEncoding("UTF-8");
         User user = repository.findByLogin(((UserDetails)authentication.getPrincipal()).getUsername());
         ObjectMapper objectMapper= new ObjectMapper();
-        String jsonString = objectMapper.writeValueAsString(user);
+        Integer portfolioId = portfolioService.getUserPortfolio(user).getId();
+        String jsonString = objectMapper.writeValueAsString(new LoginResponse(user, portfolioId));
         out.print(jsonString);
         out.flush();
+    }
+
+    private record LoginResponse(User user, Integer portfolioId) {
+
     }
 
 }

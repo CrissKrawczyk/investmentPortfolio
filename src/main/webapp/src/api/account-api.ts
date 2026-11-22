@@ -1,6 +1,6 @@
-import { Account, AccountFormData } from "../model/account"
+import { Account, AddAccountData } from "../model/account"
 import { AddPositionRequest } from "../model/position"
-import { investmentPortfolioApi } from "./investment-portfolio-api"
+import { investmentPortfolioApi, ValidatedObject } from "./investment-portfolio-api"
 
 export const {
   useCreateAccountMutation,
@@ -8,11 +8,14 @@ export const {
   useAddPositionMutation
 } = investmentPortfolioApi.injectEndpoints({
   endpoints: build => ({
-    createAccount: build.mutation<AccountFormData, AccountFormData>({
-      query: account => ({
+    createAccount: build.mutation<ValidatedObject<Account>, AddAccountData>({
+      query: request => ({
         url: `api/account`,
         method: "POST",
-        body: account
+        body: request.account,
+        params: {
+          portfolioId: request.portfolioId
+        }
       }),
       invalidatesTags: ["portfolio"],
     }),
@@ -23,7 +26,7 @@ export const {
       }),
       providesTags: (_r, _f, arg) => [{ type: "account", id: arg }],
     }),
-    addPosition: build.mutation<void, AddPositionRequest>({
+    addPosition: build.mutation<ValidatedObject<void>, AddPositionRequest>({
       query: position => ({
         url: `api/position/${position.accountId}/addPosition`,
         method: "POST",

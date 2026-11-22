@@ -1,5 +1,6 @@
-import { AddAccountRequest, Group, GroupFormData } from "../model/group"
-import { investmentPortfolioApi } from "./investment-portfolio-api"
+import { Account } from "../model/account"
+import { AddAccountRequest, AddGroupRequest, Group } from "../model/group"
+import { investmentPortfolioApi, ValidatedObject } from "./investment-portfolio-api"
 
 export const {
   useCreateGroupMutation,
@@ -7,13 +8,17 @@ export const {
   useAddAccountMutation,
 } = investmentPortfolioApi.injectEndpoints({
   endpoints: build => ({
-    createGroup: build.mutation<void, GroupFormData>({
-      query: group => ({
+    createGroup: build.mutation<ValidatedObject<Group>, AddGroupRequest>({
+      query: request => ({
         url: `api/accountGroup`,
         method: "POST",
-        body: group,
+        body: request.group,
+        params: {
+          groupId: request.groupId,
+          portfolioId: request.portfolioId
+        }
       }),
-      invalidatesTags: ["portfolio"],
+      invalidatesTags: ["portfolio", "group"],
     }),
     getGroup: build.query<Group, number | string>({
       query: id => ({
@@ -22,7 +27,7 @@ export const {
       }),
       providesTags: (_r, _f, arg) => [{ type: "group", id: arg }],
     }),
-    addAccount: build.mutation<void, AddAccountRequest>({
+    addAccount: build.mutation<ValidatedObject<Account>, AddAccountRequest>({
       query: account => ({
         url: `api/accountGroup/${account.groupId}/addAccount`,
         method: "POST",

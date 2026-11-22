@@ -5,6 +5,11 @@ export interface UserLoginData extends DataType {
   password: string
 }
 
+export interface UserLoginResponse {
+  user: User
+  portfolioId: number
+}
+
 export interface User extends DataType {
   login: string
   forename: string

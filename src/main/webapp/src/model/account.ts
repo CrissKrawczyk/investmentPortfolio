@@ -6,6 +6,11 @@ export interface AccountFormData extends DataType {
   valuePercentage: string
 }
 
+export interface AddAccountData {
+  account: AccountFormData
+  portfolioId?: string
+}
+
 export interface Account {
   id: number
   valuePercentage: string

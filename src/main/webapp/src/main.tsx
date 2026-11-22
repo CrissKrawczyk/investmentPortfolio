@@ -14,6 +14,7 @@ import { UserContextProvider } from "./store/user-context"
 import { AccountPage } from "./pages/AccountPage"
 import { CreatePositionPage } from "./forms/CreatePositionPage"
 import { PaymentCalculationPage } from "./forms/PaymentCalculationPage"
+import { CreateTestPortfolio } from "./forms/CreateTestPortfolio"
 
 const container = document.getElementById("root")
 
@@ -27,19 +28,28 @@ if (container) {
           <UserContextProvider>
             <Routes>
               <Route path="/" element={<App />} />
+              <Route path="/portfolio/:portfolioId">
+                <Route path="" element={<App />} />
+                <Route path="groupCreate" element={<CreateGroupPage />} />
+                <Route path="paymentCalculation" element={<PaymentCalculationPage />} />
+                <Route path="accountCreate" element={<CreateAccountPage />} />
+                <Route path="group/:groupId">
+                  <Route path="groupCreate" element={<CreateGroupPage />} />
+                  <Route path="" element={<GroupPage />} />
+                  <Route path="accountCreate" element={<CreateAccountPage />} />
+                  <Route path="account/:accountId">
+                    <Route path="" element={<AccountPage />} />
+                    <Route path="positionCreate" element={<CreatePositionPage />} />
+                  </Route>
+                </Route>
+                <Route path="account/:accountId">
+                  <Route path="" element={<AccountPage />} />
+                  <Route path="positionCreate" element={<CreatePositionPage />} />
+                </Route>
+              </Route>
+              <Route path="/testPortfolioCreate" element={<CreateTestPortfolio />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/accountCreate">
-                <Route path="" element={<CreateAccountPage />} />
-                <Route path=":groupId" element={<CreateAccountPage />} />
-              </Route>
-              <Route path="/groupCreate" element={<CreateGroupPage />} />
-              <Route path="/group/:groupId" element={<GroupPage />} />
-              <Route path="/account/:accountId" element={<AccountPage />} />
-              <Route path="/group/:groupId/account/:accountId" element={<AccountPage />} />
-              <Route path="/account/:accountId/positionCreate" element={<CreatePositionPage />} />
-              <Route path="/group/:groupId/account/:accountId/positionCreate" element={<CreatePositionPage />} />
-              <Route path="/paymentCalculation" element={<PaymentCalculationPage />} />
             </Routes>
           </UserContextProvider>
         </BrowserRouter>
