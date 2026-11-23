@@ -5,7 +5,10 @@
       "label": "Nazwa grupy"
     },
     "valuePercentage": {
-      "label": "Część portfela [%]"
+      "label": "Część portfela [%]",
+      "error": {
+        "outOfRange": "Wartość procentowa musi wynosić między 0 a 100"
+      }
     }
   },
   "confirmFormButton": "Utwórz grupę"

@@ -25,6 +25,7 @@ export const CreateGroupPage = () => {
           {
             idn: "name",
             type: "text",
+            required: true,
             params: undefined,
           },
           {

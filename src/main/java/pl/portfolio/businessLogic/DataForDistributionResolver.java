@@ -44,8 +44,8 @@ public class DataForDistributionResolver {
     }
 
     private Optional<DataForDistributionCompute> getDataForGroup(AccountGroup group) {
-        int valuePercentage = group.getValuePercentage();
-        if (valuePercentage <= 0) {
+        Integer valuePercentage = group.getValuePercentage();
+        if (valuePercentage == null || valuePercentage <= 0) {
             return Optional.empty();
         }
         List<Account> accounts = group.getAccounts();
@@ -55,8 +55,8 @@ public class DataForDistributionResolver {
     }
 
     private Optional<DataForDistributionCompute> getDataForAccount(Account account) {
-        int valuePercentage = account.getValuePercentage();
-        if (valuePercentage <= 0) {
+        Integer valuePercentage = account.getValuePercentage();
+        if (valuePercentage == null || valuePercentage <= 0) {
             return Optional.empty();
         }
         List<Position> positions = account.getPositions();
@@ -74,8 +74,8 @@ public class DataForDistributionResolver {
     }
 
     private Optional<DataForDistributionCompute> getDataForPosition(Position position) {
-        int valuePercentage = position.getValuePercentage();
-        if (valuePercentage <= 0) {
+        Integer valuePercentage = position.getValuePercentage();
+        if (valuePercentage == null || valuePercentage <= 0) {
             return Optional.empty();
         }
         DataForDistributionCompute positionData = DataForDistributionCompute.forPosition(position);

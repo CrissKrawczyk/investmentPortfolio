@@ -32,12 +32,29 @@ export const CreateAccountPage = () => {
           {
             idn: "name",
             type: "text",
+            required: true,
             params: undefined,
           },
           {
             idn: "valuePercentage",
             type: "numeric",
             params: undefined,
+          },
+          {
+            idn: "accountKind",
+            type: "singleSelect",
+            required: true,
+            params: {
+              dictIdn: "accountKind"
+            },
+          },
+          {
+            idn: "currency",
+            type: "singleSelect",
+            required: true,
+            params: {
+              dictIdn: "currency"
+            },
           },
         ]}
         confirmHandler={createAccountHandler}

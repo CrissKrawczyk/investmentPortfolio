@@ -6,10 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.portfolio.businessLogic.validations.ValidatedObject;
+import pl.portfolio.domain.controller.dto.account.AccountRequest;
 import pl.portfolio.domain.controller.dto.account.AccountResponse;
 import pl.portfolio.domain.model.Account;
 import pl.portfolio.domain.model.Portfolio;
+import pl.portfolio.domain.service.AccountKindService;
 import pl.portfolio.domain.service.AccountService;
+import pl.portfolio.domain.service.CurrencyService;
 import pl.portfolio.domain.service.PortfolioService;
 
 @Controller
@@ -19,10 +22,15 @@ public class AccountController {
     @Autowired
     AccountService accountService;
     @Autowired
+    AccountKindService accountKindService;
+    @Autowired
+    CurrencyService currencyService;
+    @Autowired
     PortfolioService portfolioService;
 
     @PostMapping
-    public ResponseEntity<ValidatedObject<AccountResponse>> createAccount(@RequestBody Account account, @RequestParam Integer portfolioId) {
+    public ResponseEntity<ValidatedObject<AccountResponse>> createAccount(@RequestBody AccountRequest accountRequest, @RequestParam Integer portfolioId) {
+        Account account = accountRequest.toAccount(accountKindService, currencyService);
         Portfolio portfolio = portfolioService.getPortfolio(portfolioId);
         account.setPortfolio(portfolio);
         ValidatedObject<Account> savedAccount = accountService.createAccount(account);

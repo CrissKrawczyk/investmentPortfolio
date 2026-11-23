@@ -5,7 +5,16 @@
       "label": "Nazwa konta"
     },
     "valuePercentage": {
-      "label": "Cześć grupy/portfela [%]"
+      "label": "Cześć grupy/portfela [%]",
+      "error": {
+        "outOfRange": "Wartość procentowa musi wynosić między 0 a 100"
+      }
+    },
+    "accountKind": {
+      "label": "Rodzaj konta"
+    },
+    "currency": {
+      "label": "Waluta"
     }
   },
   "confirmFormButton": "Utwórz"

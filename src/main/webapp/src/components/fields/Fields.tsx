@@ -4,6 +4,7 @@ import { PasswordField } from "./PasswordField"
 import { TextField } from "./TextField"
 import { FieldError } from "./FieldError"
 import { NumericField } from "./NumericField"
+import { SingleSelectField } from "./SingleSelectField"
 
 export const Field = (props: FormFieldProps<any>) => {
   const { formIdn, getValue, setValue, getError } = useFormContext()
@@ -23,6 +24,9 @@ export const Field = (props: FormFieldProps<any>) => {
       break
     case "numeric":
       field = <NumericField value={value} setValue={setValueHandler} {...props}  />
+      break
+    case "singleSelect":
+      field = <SingleSelectField value={value} setValue={setValueHandler} {...props}  />
       break
   }
 

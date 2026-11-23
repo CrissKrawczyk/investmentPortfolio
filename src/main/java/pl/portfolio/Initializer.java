@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.portfolio.domain.model.AccountKind;
 import pl.portfolio.domain.model.Currency;
 import pl.portfolio.domain.model.User;
+import pl.portfolio.domain.repository.AccountKindRepository;
 import pl.portfolio.domain.repository.CurrencyRepository;
 import pl.portfolio.domain.repository.UserRepository;
 import pl.portfolio.domain.service.UserService;
@@ -20,6 +22,8 @@ public class Initializer implements CommandLineRunner {
     @Autowired
     CurrencyRepository currencyRepository;
     @Autowired
+    AccountKindRepository accountKindRepository;
+    @Autowired
     PasswordEncoder passwordEncoder;
 
 
@@ -29,6 +33,7 @@ public class Initializer implements CommandLineRunner {
             return;
         initializeUsers();
         initializeCurrencies();
+        initializeKinds();
     }
 
     private void initializeUsers() {
@@ -50,5 +55,17 @@ public class Initializer implements CommandLineRunner {
         euro.setCode("EUR");
         euro.setName("Euro");
         this.currencyRepository.save(euro);
+    }
+
+    private void initializeKinds() {
+        AccountKind IKE = new AccountKind();
+        IKE.setName("IKE");
+        this.accountKindRepository.save(IKE);
+        AccountKind IKZE = new AccountKind();
+        IKZE.setName("IKZE");
+        this.accountKindRepository.save(IKZE);
+        AccountKind standard = new AccountKind();
+        standard.setName("standard");
+        this.accountKindRepository.save(standard);
     }
 }

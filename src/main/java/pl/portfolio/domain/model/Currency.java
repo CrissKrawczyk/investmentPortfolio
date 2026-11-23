@@ -1,5 +1,7 @@
 package pl.portfolio.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Currency {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Currency implements DictionaryObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,4 +22,13 @@ public class Currency {
     @Column
     private String name;
 
+    @Override
+    public String getCaption() {
+        return name;
+    }
+
+    @Override
+    public String getId() {
+        return id.toString();
+    }
 }

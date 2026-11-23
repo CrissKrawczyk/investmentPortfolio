@@ -25,6 +25,7 @@ export const CreateTestPortfolio = () => {
           {
             idn: "name",
             type: "text",
+            required: true,
             params: undefined,
           },
         ]}

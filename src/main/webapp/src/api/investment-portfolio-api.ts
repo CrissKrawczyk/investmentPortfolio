@@ -26,6 +26,15 @@ interface GetPortfolioResponse {
   otherPortfolios: OtherPortfolio[]
 }
 
+export interface GetDictionaryListResponse {
+  list: GetDictionaryListResponseElement[]
+}
+
+export interface GetDictionaryListResponseElement {
+  caption: string
+  id: string
+}
+
 export const investmentPortfolioApi = createApi({
   reducerPath: "pokemonApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080/" }),
@@ -83,6 +92,12 @@ export const investmentPortfolioApi = createApi({
         body: data
       }),
     }),
+    getDictionaryList: build.query<GetDictionaryListResponse, string>({
+      query: dictIdn => ({
+        url: `api/${dictIdn}/list`,
+        method: "GET",
+      }),
+    }),
   }),
 })
 
@@ -93,5 +108,6 @@ export const {
   useDeleteTestPortfolioMutation,
   useGetPortfolioDataQuery,
   useGetDataToComputeDistributionQuery,
-  useLazyComputePaymentDistributionQuery
+  useLazyComputePaymentDistributionQuery,
+  useGetDictionaryListQuery
 } = investmentPortfolioApi

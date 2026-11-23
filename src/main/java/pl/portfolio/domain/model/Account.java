@@ -38,4 +38,8 @@ public class Account {
     @OneToMany(mappedBy = "account", orphanRemoval = true)
     private List<Position> positions;
 
+    @JoinColumn
+    @ManyToOne
+    private AccountKind kind;
+
 }

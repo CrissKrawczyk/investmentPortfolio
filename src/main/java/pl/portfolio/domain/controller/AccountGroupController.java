@@ -6,12 +6,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.portfolio.businessLogic.validations.ValidatedObject;
+import pl.portfolio.domain.controller.dto.account.AccountRequest;
 import pl.portfolio.domain.controller.dto.account.AccountResponse;
 import pl.portfolio.domain.controller.dto.group.GroupResponse;
 import pl.portfolio.domain.model.Account;
 import pl.portfolio.domain.model.AccountGroup;
 import pl.portfolio.domain.service.AccountGroupService;
+import pl.portfolio.domain.service.AccountKindService;
 import pl.portfolio.domain.service.AccountService;
+import pl.portfolio.domain.service.CurrencyService;
 
 import java.util.Optional;
 
@@ -21,7 +24,10 @@ public class AccountGroupController {
 
     @Autowired
     AccountGroupService accountGroupService;
-
+    @Autowired
+    AccountKindService accountKindService;
+    @Autowired
+    CurrencyService currencyService;
     @Autowired
     AccountService accountService;
 
@@ -36,7 +42,8 @@ public class AccountGroupController {
 
     @PostMapping
     @RequestMapping("/{id}/addAccount")
-    public ResponseEntity<ValidatedObject<AccountResponse>> addAccount(@RequestBody Account account, @PathVariable Integer id) {
+    public ResponseEntity<ValidatedObject<AccountResponse>> addAccount(@RequestBody AccountRequest accountRequest, @PathVariable Integer id) {
+        Account account = accountRequest.toAccount(accountKindService, currencyService);
         AccountGroup group = accountGroupService.getGroup(id);
         account.setGroup(group);
         ValidatedObject<Account> savedAccount = accountService.createAccount(account);

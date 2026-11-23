@@ -6,7 +6,7 @@ import pl.portfolio.domain.model.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public record AccountResponse(Integer id, String name, int valuePercentage, List<PositionInAccount> positions) {
+public record AccountResponse(Integer id, String name, Integer valuePercentage, List<PositionInAccount> positions) {
 
     static public AccountResponse fromAccount(Account account) {
         List<Position> positions = account.getPositions();
