@@ -32,4 +32,7 @@ public class Position {
     @ManyToOne
     private Currency currency;
 
+    @Column
+    private PositionKind kind;
+
 }

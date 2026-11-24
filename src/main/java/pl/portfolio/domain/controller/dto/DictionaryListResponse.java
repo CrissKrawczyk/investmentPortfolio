@@ -20,4 +20,19 @@ public record DictionaryListResponse(List<DictionaryListResponseElement> list) {
         return new DictionaryListResponseElement(caption, id);
     }
 
+    public static DictionaryListResponse forEnums(List<Enum> objects) {
+        List<DictionaryListResponseElement> elements = objects
+                .stream()
+                .map(DictionaryListResponse::enumToListElement)
+                .toList();
+        return new  DictionaryListResponse(elements);
+    }
+
+    private static DictionaryListResponseElement enumToListElement(Enum object) {
+        //TODO localization for enums
+        String caption = "";
+        String id = object.name();
+        return new DictionaryListResponseElement(caption, id);
+    }
+
 }
