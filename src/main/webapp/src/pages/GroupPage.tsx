@@ -1,12 +1,14 @@
 import { useTranslation } from "react-i18next"
 import { useNavigate, useParams } from "react-router"
-import { useGetGroupQuery } from "../api/group-api"
+import { useDeleteGroupMutation, useGetGroupQuery } from "../api/group-api"
+import { DeleteButton } from "../atoms/DeleteButton"
 
 export const GroupPage = () => {
   const { groupId, portfolioId } = useParams()
   const { data: group } = useGetGroupQuery(groupId ?? 0)
   const { t } = useTranslation("GroupPage")
   const navigate = useNavigate()
+  const [deleteGroup] = useDeleteGroupMutation()
 
   const moveToAccountCreation = () => {
     navigate(`accountCreate`)
@@ -26,6 +28,13 @@ export const GroupPage = () => {
 
   if (!group) {
     return
+  }
+
+  const deleteGroupHandler = async () => {
+    const result = await deleteGroup(group.id)
+    if (result.data !== undefined) {
+      navigate("..")
+    }
   }
 
   const accounts = group.accounts
@@ -50,6 +59,7 @@ export const GroupPage = () => {
       ))}
       <button onClick={moveToAccountCreation}>{t("addAccountButton")}</button>
       <button onClick={moveToGroupCreation}>{t("addGroupButton")}</button>
+      <DeleteButton deleteHandler={deleteGroupHandler} label={t("deleteGroup")} />
     </div>
   )
 }

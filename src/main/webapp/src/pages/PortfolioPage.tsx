@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
 import { useNavigate, useParams } from "react-router"
 import { useDeleteTestPortfolioMutation, useGetPortfolioDataQuery } from "../api/investment-portfolio-api"
+import { DeleteButton } from "../atoms/DeleteButton"
 
 export const PortfolioPage = () => {
   const { portfolioId } = useParams()
@@ -82,7 +83,7 @@ export const PortfolioPage = () => {
         </div>
       ))}
       <button onClick={moveToTestPortfolioCreation}>{t("createTestPortfolio")}</button>
-      {portfolio.testPortfolio && <button onClick={deletePortfolioHandler}>{t("deletePortfolio")}</button>}
+      {portfolio.testPortfolio && <DeleteButton deleteHandler={deletePortfolioHandler} label={t("deletePortfolio")} />}
     </div>
   )
 }

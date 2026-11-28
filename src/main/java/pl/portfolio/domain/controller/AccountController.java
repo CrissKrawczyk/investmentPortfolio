@@ -38,11 +38,16 @@ public class AccountController {
         return new ResponseEntity<>(savedAccount.forNewObject(accountResponse), savedAccount.getStatusByErrors(HttpStatus.CREATED));
     }
 
-    @GetMapping
-    @RequestMapping("/{id}")
-    public ResponseEntity<AccountResponse> getAccount(@PathVariable Integer id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountResponse> getAccount(@PathVariable("id") Integer id) {
         Account account = accountService.getAccount(id);
         return new ResponseEntity<>(AccountResponse.fromAccount(account), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{accountId}")
+    public ResponseEntity<Void> deleteTestPortfolio(@PathVariable("accountId") Integer accountId) {
+        accountService.deleteAccount(accountId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

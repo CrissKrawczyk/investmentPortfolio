@@ -51,11 +51,16 @@ public class AccountGroupController {
         return new ResponseEntity<>(savedAccount.forNewObject(accountResponse), savedAccount.getStatusByErrors(HttpStatus.CREATED));
     }
 
-    @GetMapping
-    @RequestMapping("/{id}")
-    public ResponseEntity<GroupResponse> getGroup(@PathVariable Integer id) {
+    @GetMapping("{id}")
+    public ResponseEntity<GroupResponse> getGroup(@PathVariable("id") Integer id) {
         AccountGroup group = accountGroupService.getGroup(id);
         return new ResponseEntity<>(GroupResponse.forGroup(group), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("{groupId}")
+    public ResponseEntity<Void> deleteTestPortfolio(@PathVariable("groupId") Integer groupId) {
+        accountGroupService.deleteGroup(groupId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

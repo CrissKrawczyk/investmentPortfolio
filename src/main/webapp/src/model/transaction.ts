@@ -4,6 +4,7 @@ export interface TransactionFormData extends DataType {
     amount: string
     price: string
     type: string
+    date: string
 }
 
 export interface Transaction {

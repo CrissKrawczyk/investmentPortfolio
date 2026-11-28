@@ -42,6 +42,11 @@ export const AddTransactionForm = (props: AddTransactionFormProps) => {
               decimalDigits: 2
             },
           },
+          {
+            idn: "date",
+            type: "date",
+            params: {}
+          },
         ]}
         confirmHandler={addTransaction}
         cancelHandler={onClose}

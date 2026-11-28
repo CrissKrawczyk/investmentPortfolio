@@ -4,6 +4,8 @@ import { Position } from "./position"
 export interface AccountFormData extends DataType {
   name: string
   valuePercentage: string
+  accountKind: string
+  currency: string
 }
 
 export interface AddAccountData {

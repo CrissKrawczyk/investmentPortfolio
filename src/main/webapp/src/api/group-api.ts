@@ -6,6 +6,7 @@ export const {
   useCreateGroupMutation,
   useGetGroupQuery,
   useAddAccountMutation,
+  useDeleteGroupMutation,
 } = investmentPortfolioApi.injectEndpoints({
   endpoints: build => ({
     createGroup: build.mutation<ValidatedObject<Group>, AddGroupRequest>({
@@ -34,6 +35,13 @@ export const {
         body: account.account,
       }),
       invalidatesTags: (_r, _f, arg) => [{ type: "group", id: arg.groupId }],
+    }),
+    deleteGroup: build.mutation<void, number>({
+      query: groupId => ({
+        url: `api/accountGroup/${groupId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["portfolio", "group"],
     }),
   }),
 })

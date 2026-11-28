@@ -6,6 +6,9 @@
     },
     "price": {
       "label": "Cena"
+    },
+    "date": {
+      "label": "Data"
     }
   },
   "confirmFormButton": "Dodaj",

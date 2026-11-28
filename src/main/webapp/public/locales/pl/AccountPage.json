@@ -3,5 +3,6 @@
     "addPositionButton": "Dodaj pozycję do konta",
     "position": "Pozycja: ",
     "buy": "Dodaj zakup",
-    "sell": "Dodaj sprzedaż"
+    "sell": "Dodaj sprzedaż",
+    "deleteAccount": "Usuń konto"
 }

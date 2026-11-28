@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.portfolio.businessLogic.validations.ValidatedObject;
 import pl.portfolio.domain.controller.dto.Transaction.TransactionResponse;
+import pl.portfolio.domain.controller.dto.position.PositionRequest;
 import pl.portfolio.domain.controller.dto.position.PositionResponse;
-import pl.portfolio.domain.model.Account;
 import pl.portfolio.domain.model.Position;
 import pl.portfolio.domain.model.Transaction;
 import pl.portfolio.domain.model.TransactionType;
 import pl.portfolio.domain.service.AccountService;
+import pl.portfolio.domain.service.CurrencyService;
 import pl.portfolio.domain.service.PositionService;
 import pl.portfolio.domain.service.TransactionService;
 
@@ -27,6 +28,9 @@ public class PositionController {
     AccountService accountService;
 
     @Autowired
+    CurrencyService currencyService;
+
+    @Autowired
     PositionService positionService;
 
     @Autowired
@@ -34,10 +38,9 @@ public class PositionController {
 
     @PostMapping
     @RequestMapping("/{accountId}/addPosition")
-    public ResponseEntity<ValidatedObject<PositionResponse>> createPosition(@RequestBody Position position, @PathVariable Integer accountId) {
-        Account account = accountService.getAccount(accountId);
-        position.setAccount(account);
-        ValidatedObject<Position> savedPosition = positionService.createPosition(position);
+    public ResponseEntity<ValidatedObject<PositionResponse>> createPosition(@RequestBody PositionRequest position, @PathVariable Integer accountId) {
+        position.setAccountId(accountId);
+        ValidatedObject<Position> savedPosition = positionService.createPosition(position.toPosition(currencyService, accountService));
         PositionResponse positionResponse = PositionResponse.fromPosition(savedPosition.getObject());
         return new ResponseEntity<>(savedPosition.forNewObject(positionResponse), savedPosition.getStatusByErrors(HttpStatus.CREATED));
     }

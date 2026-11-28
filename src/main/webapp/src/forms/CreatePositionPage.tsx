@@ -25,6 +25,28 @@ export const CreatePositionPage = () => {
           {
             idn: "name",
             type: "text",
+            required: true,
+            params: undefined,
+          },
+          {
+            idn: "kind",
+            type: "singleSelect",
+            required: true,
+            params: {
+              dictIdn: "positionKind"
+            },
+          },
+          {
+            idn: "currency",
+            type: "singleSelect",
+            required: true,
+            params: {
+              dictIdn: "currency"
+            },
+          },
+          {
+            idn: "valuePercentage",
+            type: "numeric",
             params: undefined,
           },
         ]}

@@ -3,6 +3,7 @@ import { TransactionFormData } from "./transaction"
 
 export interface PositionFormData extends DataType {
   name: string
+  kind: string
 }
 
 export interface AddPositionRequest {

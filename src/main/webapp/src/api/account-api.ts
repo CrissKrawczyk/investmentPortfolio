@@ -5,7 +5,8 @@ import { investmentPortfolioApi, ValidatedObject } from "./investment-portfolio-
 export const {
   useCreateAccountMutation,
   useGetAccountQuery,
-  useAddPositionMutation
+  useAddPositionMutation,
+  useDeleteAccountMutation
 } = investmentPortfolioApi.injectEndpoints({
   endpoints: build => ({
     createAccount: build.mutation<ValidatedObject<Account>, AddAccountData>({
@@ -33,6 +34,13 @@ export const {
         body: position.position,
       }),
       invalidatesTags: (_r, _f, arg) => [{ type: "account", id: arg.accountId }],
+    }),
+    deleteAccount: build.mutation<void, number>({
+      query: accountId => ({
+        url: `api/account/${accountId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["portfolio", "group"],
     }),
   }),
 })

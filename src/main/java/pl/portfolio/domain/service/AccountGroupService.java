@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import pl.portfolio.businessLogic.validations.AccountValidations;
 import pl.portfolio.businessLogic.validations.GroupValidations;
 import pl.portfolio.businessLogic.validations.ValidatedObject;
+import pl.portfolio.domain.model.Account;
 import pl.portfolio.domain.model.AccountGroup;
 import pl.portfolio.domain.model.Portfolio;
+import pl.portfolio.domain.model.User;
 import pl.portfolio.domain.repository.AccountGroupRepository;
 
 import java.util.List;
@@ -20,6 +22,9 @@ public class AccountGroupService {
 
     @Autowired
     private PortfolioService portfolioService;
+
+    @Autowired
+    private UserService userService;
 
     public ValidatedObject<AccountGroup> createAccountGroup(AccountGroup group, Integer groupId, Integer portfolioId) {
         if (groupId != null) {
@@ -45,6 +50,26 @@ public class AccountGroupService {
 
     public List<AccountGroup> getPortfolioGroups(Portfolio portfolio) {
         return accountGroupRepository.findAllByPortfolio(portfolio);
+    }
+
+    public void deleteGroup(Integer id) {
+        User currentUser = userService.getCurrentUser();
+        AccountGroup group = getGroup(id);
+        Integer portfolioUserId = findGroupOwner(group).getId();
+        if (portfolioUserId.equals(currentUser.getId())) {
+            accountGroupRepository.delete(group);
+        } else {
+            throw new RuntimeException("Unauthorized group deletion");
+        }
+    }
+
+    private User findGroupOwner(AccountGroup accountGroup) {
+        Portfolio portfolio = accountGroup.getPortfolio();
+        if (portfolio != null) {
+            return portfolio.getOwner();
+        }
+        AccountGroup parent = accountGroup.getGroup();
+        return findGroupOwner(parent);
     }
 
 }

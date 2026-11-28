@@ -2,7 +2,7 @@ import { PropsWithChildren, createContext, useContext, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Field } from "../components/fields/Fields"
 
-export type FieldType = "text" | "password" | "numeric" | "singleSelect"
+export type FieldType = "text" | "password" | "numeric" | "singleSelect" | "date"
 
 export interface FieldProps<P> extends FormFieldProps<P> {
   setValue: (value: string) => void

@@ -3,6 +3,18 @@
   "fields": {
     "name": {
       "label": "Nazwa pozycji"
+    },
+    "valuePercentage": {
+      "label": "Cześć konta [%]",
+      "error": {
+        "outOfRange": "Wartość procentowa musi wynosić między 0 a 100"
+      }
+    },
+    "kind": {
+      "label": "Rodzaj pozycji"
+    },
+    "currency": {
+      "label": "Waluta"
     }
   },
   "confirmFormButton": "Utwórz"
